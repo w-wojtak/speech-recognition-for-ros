@@ -20,9 +20,13 @@ This Python-based speech recognition module captures spoken commands on a Window
 ## Architecture
 
 [Windows PC]
+
 Speech Recognition (Python)
+
 ↓ UDP
+
 [Ubuntu w/ ROS1 or ROS2]
+
 Listener node processes command
 
 ## How to Use
