@@ -71,7 +71,7 @@ def speak(text):
 def main():
     recognizer = sr.Recognizer()
     mic = sr.Microphone()
-    print("🟢 Speech recognition is running. Say a command:")
+    print("Speech recognition is running. Say a command:")
 
     while True:
         spoken_text = recognize_speech_from_mic(recognizer, mic)
