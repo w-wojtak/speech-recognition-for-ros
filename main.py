@@ -1,6 +1,11 @@
+import socket
 import speech_recognition as sr
+import pyttsx3
 
-# Mapping recognized variants to normalized commands
+UDP_IP = "172.19.251.174"  # Your WSL eth0 IP (from `ip addr show eth0`)
+UDP_PORT = 5005
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
 COMMAND_MAP = {
     "let's start": "start",
     "start": "start",
@@ -24,12 +29,20 @@ COMMAND_MAP = {
     "bass": "give_base"
 }
 
+RESPONSES = {
+    "start": "Starting.",
+    "finished": "Finished.",
+    "next_object": "Next object.",
+    "give_motor": "Here is the motor.",
+    "give_load": "Here is the load.",
+    "give_bearing": "Here is the bearing.",
+    "give_base": "Here is the base."
+}
+
 def find_command(text):
     text = text.lower()
-    # Try exact match first
     if text in COMMAND_MAP:
         return COMMAND_MAP[text]
-    # Try partial match (key contained in recognized text)
     for key in COMMAND_MAP.keys():
         if key in text:
             return COMMAND_MAP[key]
@@ -40,7 +53,6 @@ def recognize_speech_from_mic(recognizer, microphone):
         print("Listening...")
         recognizer.adjust_for_ambient_noise(source)
         audio = recognizer.listen(source)
-
     try:
         text = recognizer.recognize_google(audio).lower()
         print(f"Recognized: {text}")
@@ -51,21 +63,30 @@ def recognize_speech_from_mic(recognizer, microphone):
         print(f"Could not request results; {e}")
     return None
 
+def speak(text):
+    engine = pyttsx3.init()
+    engine.say(text)
+    engine.runAndWait()
+
 def main():
     recognizer = sr.Recognizer()
     mic = sr.Microphone()
-
-    print("Say a command:")
+    print("🟢 Speech recognition is running. Say a command:")
 
     while True:
         spoken_text = recognize_speech_from_mic(recognizer, mic)
-        if spoken_text:
-            cmd = find_command(spoken_text)
-            if cmd:
-                print(f"Command recognized and normalized: '{cmd}'")
-                # TODO: send `cmd` string to ROS1/ROS2 here
-            else:
-                print("Command not recognized as a valid command.")
+        if not spoken_text:
+            speak("I didn't catch that.")
+            continue
+        cmd = find_command(spoken_text)
+        if cmd:
+            print(f"[INFO] Command recognized: '{cmd}'")
+            sock.sendto(cmd.encode(), (UDP_IP, UDP_PORT))  # send UDP to ROS2 WSL IP
+            response = RESPONSES.get(cmd, f"Command {cmd} sent.")
+            speak(response)
+        else:
+            print("[INFO] Command not recognized.")
+            speak("Command not recognized.")
 
 if __name__ == "__main__":
     main()
