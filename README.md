@@ -73,5 +73,5 @@ Make sure ROS is sending messages via UDP to the IP and port defined in `speech_
 ## Notes
 Make sure your UDP IP and ports are correct for your network setup.
 
-Use ip addr show eth0 inside WSL to find your Windows IP from Ubuntu side.
+Use `ip addr show eth0` inside WSL to find your Windows IP from Ubuntu side.
 
