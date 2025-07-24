@@ -4,11 +4,12 @@ This Python-based speech recognition module captures spoken commands on a Window
 
 ## Features
 
-- Uses the Google Web Speech API via `speech_recognition` library
-- Recognizes a set of predefined commands (with variants)
-- Normalizes and maps spoken phrases to compact robot-friendly keywords
-- Sends commands via UDP to a listener node in either ROS1 or ROS2
-- Supports text-to-speech feedback using `pyttsx3`
+- Speech recognition using the **Google Web Speech API**
+- Supports **command variants** and fuzzy matching
+- Voice feedback using **pyttsx3**
+- Sends compact commands via **UDP** to ROS nodes
+- **Receives messages from ROS** (and speaks them aloud)
+- Works with **ROS1 and ROS2**, on the same or different machines
 
 ## Example Commands
 
@@ -19,15 +20,23 @@ This Python-based speech recognition module captures spoken commands on a Window
 
 ## Architecture
 
-[Windows PC]
+#### Windows PC
 
-Speech Recognition (Python)
+Speech Command Sender (Python)
 
-↓ UDP
+Sends voice command over UDP
 
-[Ubuntu w/ ROS1 or ROS2]
+#### Ubuntu with ROS1 or ROS2
 
-Listener node processes command
+UDP Listener Node receives command
+
+Publishes to a ROS topic
+
+#### Windows PC
+
+Speech Command Receiver (Python)
+
+Receives message over UDP and plays TTS feedback
 
 ## How to Use
 
@@ -37,7 +46,7 @@ Listener node processes command
 pip install speechrecognition pyttsx3
 ```
 
-Run the script on Windows:
+Run the Speech Sender (on Windows):
 
 ```
 python speech_command_sender.py
@@ -51,3 +60,18 @@ ros2 run your_package udp_listener_node     # for ROS2
 ```
 
 Speak a supported command!
+
+Run Receiver to Speak ROS Messages (on Windows)
+
+```
+python speech_command_receiver.py
+```
+
+Make sure ROS is sending messages via UDP to the IP and port defined in `speech_command_receiver.py`.
+
+
+## Notes
+Make sure your UDP IP and ports are correct for your network setup.
+
+Use ip addr show eth0 inside WSL to find your Windows IP from Ubuntu side.
+
