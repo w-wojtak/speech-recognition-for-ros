@@ -9,6 +9,9 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 COMMAND_MAP = {
     "let's start": "start",
     "start": "start",
+    "let's go": "start",
+    "let's begin": "start",
+    "begin": "start",
     "i have finished": "finished",
     "have finished": "finished",
     "finished": "finished",
