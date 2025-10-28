@@ -1,6 +1,7 @@
 import socket
-import speech_recognition as sr
-import pyttsx3
+import speech_recognition as sr  # pip install speechrecognition
+import pyttsx3 # pip install pyttsx3
+# pip install pyaudio
 
 UDP_IP = "172.19.251.174"  # Your WSL eth0 IP (from `ip addr show eth0`)
 UDP_PORT = 5005
