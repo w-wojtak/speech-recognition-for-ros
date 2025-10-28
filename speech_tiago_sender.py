@@ -31,7 +31,6 @@ COMMAND_MAP = {
 }
 
 RESPONSES = {
-    "next_object": "Next object.",
     "give_motor": "Here is the motor.",
     "give_load": "Here is the load.",
     "give_bearing": "Here is the bearing.",
@@ -43,7 +42,7 @@ GRAMMAR = '''
 [
     "next object", "next", "object",
     "give me the motor", "give me the load", "give me the bearing", "give me the base",
-    "I need the motor", "I need  the load", "I need  the bearing", "I need  the base",
+    "I need the motor", "I need  the load", "I need  the bearing", "I need the base",
     "motor", "load", "lo", "low", "bearing", "bear", "base", "bass"
 ]
 '''
