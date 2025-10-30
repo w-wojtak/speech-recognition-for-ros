@@ -74,7 +74,7 @@ def main():
         return
     
     recognizer = KaldiRecognizer(model, 16000)
-    recognizer.SetGrammar(GRAMMAR)  # ⚡ Constrain to your commands only!
+    recognizer.SetGrammar(GRAMMAR)  # Constrain to your commands only!
     
     mic = pyaudio.PyAudio()
     stream = mic.open(
@@ -86,7 +86,7 @@ def main():
     )
     stream.start_stream()
     
-    print("🎤 Speech recognition ready! Say a command:")
+    print("Speech recognition ready! Say a command:")
     
     try:
         while True:
@@ -97,11 +97,11 @@ def main():
                 text = result.get("text", "")
                 
                 if text:
-                    print(f"✓ Recognized: {text}")
+                    print(f"***Recognized: {text}")
                     cmd = find_command(text)
                     
                     if cmd:
-                        print(f"→ Executing: '{cmd}'")
+                        print(f"----> Executing: '{cmd}'")
                         sock.sendto(cmd.encode(), (UDP_IP, UDP_PORT))
                         speak(RESPONSES.get(cmd, ""))
     
