@@ -11,7 +11,7 @@ sock.bind((UDP_IP, UDP_PORT))
 
 # Initialize TTS engine once (reuse for efficiency)
 engine = pyttsx3.init()
-engine.setProperty('rate', 175)  # Adjust speaking rate if you want
+engine.setProperty('rate', 175)  # Adjust speaking rate 
 engine.setProperty('volume', 1.0)
 
 def speak(text):
