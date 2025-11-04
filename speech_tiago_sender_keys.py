@@ -12,9 +12,6 @@ UDP_PORT = 5005
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 COMMAND_MAP = {
-    "next object": "next_object",
-    "next": "next_object",
-    "object": "next_object",
     "give me the motor": "give_motor",
     "I need the motor": "give_motor",
     "I need the load": "give_load",
@@ -46,7 +43,6 @@ RESPONSES = {
 
 GRAMMAR = '''
 [
-    "next object", "next", "object",
     "give me the motor", "give me the load", "give me the bearing", "give me the base",
     "I need the motor", "I need  the load", "I need  the bearing", "I need the base",
     "I take the motor", "I take  the load", "I take  the bearing", "I take the base",
