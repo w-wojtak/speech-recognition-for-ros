@@ -20,6 +20,10 @@ COMMAND_MAP = {
     "I need the load": "give_load",
     "I need the bearing": "give_bearing",
     "I need the base": "give_base",
+    "I take the motor": "give_motor",
+    "I take the load": "give_load",
+    "I take the bearing": "give_bearing",
+    "I take the base": "give_base",
     "give me the load": "give_load",
     "give me the bearing": "give_bearing",
     "give me the base": "give_base",
@@ -45,6 +49,7 @@ GRAMMAR = '''
     "next object", "next", "object",
     "give me the motor", "give me the load", "give me the bearing", "give me the base",
     "I need the motor", "I need  the load", "I need  the bearing", "I need the base",
+    "I take the motor", "I take  the load", "I take  the bearing", "I take the base",
     "motor", "load", "lo", "low", "bearing", "bear", "base", "bass"
 ]
 '''
